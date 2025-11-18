@@ -37,3 +37,19 @@ npm-debug.log*
 .env
 .env.local
 
+# Private project folders (not for public repo)
+attachments/
+notes/
+presentations/
+research/
+export/
+media/
+code/
+design/
+docs/
+mvp/
+*.md
+!README.md
+!CHANGELOG.md
+!DOMAIN_SETUP.md
+

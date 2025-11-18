@@ -1,0 +1,22 @@
+{
+  "name": "bots-and-bones",
+  "version": "1.0.0",
+  "description": "Bots & Bones - Splash page",
+  "private": true,
+  "scripts": {
+    "version": "git add -A && git commit -m 'chore: bump version' && git tag -a v$(node -p \"require('./package.json').version\") -m 'Version $(node -p \"require('./package.json').version\")'",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rybushkin/bots-and-bones.git"
+  },
+  "keywords": [
+    "bots",
+    "bones",
+    "splash",
+    "landing"
+  ],
+  "author": "rybushkin",
+  "license": "MIT"
+}
