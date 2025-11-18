@@ -46,8 +46,8 @@ export/
 media/
 code/
 design/
-docs/
 mvp/
+# Note: docs/ is used for GitHub Pages, so it's public
 *.md
 !README.md
 !CHANGELOG.md
