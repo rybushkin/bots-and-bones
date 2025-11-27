@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
         }
 
         .logo-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
             height: 100%;
+            gap: 40px;
         }
 
         .logo {
@@ -39,6 +42,191 @@
             width: auto;
             height: auto;
             object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo.glitch {
+            animation: logoGlitch 0.3s ease-in-out;
+        }
+
+        @keyframes logoGlitch {
+            0%, 100% { 
+                transform: translate(0, 0);
+                filter: hue-rotate(0deg);
+            }
+            25% { 
+                transform: translate(-3px, 2px);
+                filter: hue-rotate(90deg);
+            }
+            50% { 
+                transform: translate(3px, -2px);
+                filter: hue-rotate(180deg);
+            }
+            75% { 
+                transform: translate(-2px, -3px);
+                filter: hue-rotate(270deg);
+            }
+        }
+
+        .description-text {
+            max-width: 600px;
+            text-align: center;
+            color: #666666;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 0 20px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+        }
+
+        .description-text p {
+            margin: 0;
+        }
+
+        .description-text a {
+            color: #666666;
+            text-decoration: underline;
+            transition: none;
+        }
+
+        .description-text a.email-glitch {
+            animation: emailGlitch 0.3s ease-in-out;
+        }
+
+        @keyframes emailGlitch {
+            0%, 100% { 
+                transform: translate(0, 0);
+                text-shadow: 0 0 0 transparent;
+            }
+            25% { 
+                transform: translate(-2px, 1px);
+                text-shadow: 2px 0 5px rgba(255, 0, 0, 0.7);
+            }
+            50% { 
+                transform: translate(2px, -1px);
+                text-shadow: -2px 0 5px rgba(0, 255, 255, 0.7);
+            }
+            75% { 
+                transform: translate(-1px, -2px);
+                text-shadow: 0 2px 5px rgba(255, 0, 0, 0.7);
+            }
+        }
+
+        /* Glitch effects */
+        .text-glitch {
+            position: relative;
+            animation: textGlitchShake 0.3s ease-in-out;
+        }
+
+        .text-glitch::before,
+        .text-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-glitch::before {
+            color: rgba(255, 0, 0, 0.7);
+            animation: glitchRed 0.3s infinite;
+            z-index: -1;
+        }
+
+        .text-glitch::after {
+            color: rgba(0, 255, 255, 0.7);
+            animation: glitchCyan 0.3s infinite;
+            z-index: -2;
+        }
+
+        @keyframes textGlitchShake {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2px, 1px); }
+            50% { transform: translate(2px, -1px); }
+            75% { transform: translate(-1px, -2px); }
+        }
+
+        @keyframes glitchRed {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(-2px, 1px); }
+            40% { transform: translate(-3px, -1px); }
+            60% { transform: translate(1px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes glitchCyan {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(2px, -1px); }
+            40% { transform: translate(3px, 1px); }
+            60% { transform: translate(-1px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .char-glitch {
+            display: inline-block;
+            animation: charFlicker 0.1s infinite;
+        }
+
+        @keyframes charFlicker {
+            0%, 100% { opacity: 1; color: #666666; }
+            50% { opacity: 0.8; color: #999999; }
+        }
+
+        /* Background glitch overlay */
+        #glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, 
+                #B3B3B3 0%, 
+                #DCDDDC 19%, 
+                #DCDDDC 71%, 
+                #AFAFAF 95%);
+            z-index: 99999;
+            display: none;
+            pointer-events: none;
+            animation: glitchFlash 0.1s infinite;
+        }
+
+        #glitch-overlay.active {
+            display: block;
+        }
+
+        @keyframes glitchFlash {
+            0%, 100% { 
+                opacity: 1;
+                filter: invert(0);
+                transform: translate(0, 0);
+            }
+            10% { 
+                opacity: 0.9;
+                filter: invert(1);
+                transform: translate(-2px, 1px);
+            }
+            20% { 
+                opacity: 1;
+                filter: invert(0);
+                transform: translate(3px, -2px);
+            }
+            30% { 
+                opacity: 0.95;
+                filter: invert(1) hue-rotate(180deg);
+                transform: translate(-1px, 2px);
+            }
+            40% { 
+                opacity: 1;
+                filter: invert(0);
+                transform: translate(2px, -1px);
+            }
+            50% { 
+                opacity: 0.9;
+                filter: invert(1);
+                transform: translate(-3px, 1px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -46,12 +234,196 @@
                 max-width: 200px;
                 max-height: 200px;
             }
+
+            .description-text {
+                font-size: 14px;
+                max-width: 90%;
+            }
+
+            .logo-container {
+                gap: 30px;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="glitch-overlay"></div>
     <div class="logo-container">
-        <img src="assets/bnblogo.png" alt="Bots & Bones Logo" class="logo">
+        <img src="assets/bnblogo.png" alt="Bots & Bones Logo" class="logo" id="logo">
+        <div class="description-text" id="description-text">
+            <p>A&nbsp;studio that gives bots their&nbsp;brains and systems their&nbsp;backbone. We build friendly, reliable automations with a&nbsp;bit of&nbsp;humor and a&nbsp;lot of&nbsp;engineering.</p>
+            <p>If&nbsp;you want something that actually works, just&nbsp;write us: <a href="mailto:hello@bots-n-bones.com" id="email-link">hello@bots-n-bones.com</a> — we're&nbsp;here.</p>
+        </div>
     </div>
+
+    <script>
+        // Glitch effect functions
+        const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+        const glitchSymbols = '█▓▒░▄▀■□▪▫';
+
+        // Apply text glitch to description
+        function applyTextGlitch(element) {
+            const originalText = element.textContent;
+            element.setAttribute('data-text', originalText);
+            element.classList.add('text-glitch');
+            
+            const duration = 200 + Math.random() * 200;
+            setTimeout(() => {
+                element.classList.remove('text-glitch');
+                element.removeAttribute('data-text');
+            }, duration);
+        }
+
+        // Apply logo glitch
+        function applyLogoGlitch() {
+            const logo = document.getElementById('logo');
+            logo.classList.add('glitch');
+            setTimeout(() => {
+                logo.classList.remove('glitch');
+            }, 300);
+        }
+
+        // Apply background glitch
+        function applyBackgroundGlitch() {
+            const overlay = document.getElementById('glitch-overlay');
+            overlay.classList.add('active');
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 100);
+        }
+
+        // Glitch random character in text
+        function glitchRandomCharacter(element) {
+            const text = element.textContent;
+            if (text.length < 3) return;
+            
+            let attempts = 0;
+            let pos = -1;
+            while (attempts < 10) {
+                pos = 1 + Math.floor(Math.random() * (text.length - 2));
+                if (text[pos] !== ' ' && text[pos] !== '\n' && text[pos] !== '\u00A0') {
+                    break;
+                }
+                attempts++;
+            }
+            
+            if (pos === -1 || attempts >= 10) return;
+            
+            const originalChar = text[pos];
+            const useSymbol = Math.random() > 0.5;
+            const glitchChar = useSymbol 
+                ? glitchSymbols[Math.floor(Math.random() * glitchSymbols.length)]
+                : glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            
+            const newText = text.substring(0, pos) + glitchChar + text.substring(pos + 1);
+            element.textContent = newText;
+            
+            const restoreDuration = 100 + Math.random() * 900;
+            setTimeout(() => {
+                const currentText = element.textContent;
+                if (currentText[pos] === glitchChar) {
+                    element.textContent = currentText.substring(0, pos) + originalChar + currentText.substring(pos + 1);
+                }
+            }, restoreDuration);
+        }
+
+        // Light glitch - text only
+        function triggerLightGlitch() {
+            const descriptionText = document.getElementById('description-text');
+            if (descriptionText) {
+                const paragraphs = descriptionText.querySelectorAll('p');
+                if (paragraphs.length > 0) {
+                    const randomParagraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+                    // Sometimes apply text glitch
+                    if (Math.random() > 0.5) {
+                        applyTextGlitch(randomParagraph);
+                    } else {
+                        // Sometimes glitch random characters
+                        glitchRandomCharacter(randomParagraph);
+                    }
+                }
+            }
+        }
+
+        // Medium glitch - text and logo
+        function triggerMediumGlitch() {
+            const descriptionText = document.getElementById('description-text');
+            if (descriptionText) {
+                const paragraphs = descriptionText.querySelectorAll('p');
+                paragraphs.forEach(paragraph => {
+                    if (Math.random() > 0.3) {
+                        applyTextGlitch(paragraph);
+                    }
+                });
+            }
+            applyLogoGlitch();
+        }
+
+        // Heavy glitch - text, logo, and background
+        function triggerHeavyGlitch() {
+            const descriptionText = document.getElementById('description-text');
+            if (descriptionText) {
+                const paragraphs = descriptionText.querySelectorAll('p');
+                paragraphs.forEach(paragraph => {
+                    applyTextGlitch(paragraph);
+                    // Multiple character glitches
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => glitchRandomCharacter(paragraph), i * 100);
+                    }
+                });
+            }
+            applyLogoGlitch();
+            applyBackgroundGlitch();
+        }
+
+        // Glitch schedulers
+        function scheduleLightGlitch() {
+            const nextGlitch = 6000 + Math.random() * 4000; // 6-10 sec
+            setTimeout(() => {
+                triggerLightGlitch();
+                scheduleLightGlitch();
+            }, nextGlitch);
+        }
+
+        function scheduleMediumGlitch() {
+            const nextGlitch = 18000 + Math.random() * 4000; // 18-22 sec
+            setTimeout(() => {
+                triggerMediumGlitch();
+                scheduleMediumGlitch();
+            }, nextGlitch);
+        }
+
+        function scheduleHeavyGlitch() {
+            const nextGlitch = 55000 + Math.random() * 10000; // 55-65 sec
+            setTimeout(() => {
+                triggerHeavyGlitch();
+                scheduleHeavyGlitch();
+            }, nextGlitch);
+        }
+
+        // Start glitch schedulers with different initial delays
+        setTimeout(scheduleLightGlitch, 4000);   // Start light after 4 sec
+        setTimeout(scheduleMediumGlitch, 12000); // Start medium after 12 sec
+        setTimeout(scheduleHeavyGlitch, 20000);  // Start heavy after 20 sec
+
+        // Email glitch on hover and click
+        const emailLink = document.getElementById('email-link');
+        if (emailLink) {
+            function triggerEmailGlitch() {
+                emailLink.classList.add('email-glitch');
+                setTimeout(() => {
+                    emailLink.classList.remove('email-glitch');
+                }, 300);
+            }
+
+            emailLink.addEventListener('mouseenter', () => {
+                triggerEmailGlitch();
+            });
+
+            emailLink.addEventListener('click', () => {
+                triggerEmailGlitch();
+            });
+        }
+    </script>
 </body>
 </html>
